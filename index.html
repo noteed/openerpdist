@@ -38,6 +38,27 @@ to be uploaded to pypi with minimal changes from upstream sources.</p>
 <p>Please note that even if <code>openerpdist</code> itself uses a 3-clause BSD license, the
 resulting packages remain under the AGPL license.</p>
 
+<h2>Details</h2>
+
+<p><code>openerpdist</code> builds packages ready to be consumed by the Python
+infrastructure. In particular, it uses the regular <code>setup.py</code> files (using
+<code>setuptools</code>), and the resulting tarballs are installable using e.g. <code>pip</code>.</p>
+
+<p>One possible usage is to generate the desired packages and make them available
+through a web server with an HTML listing (e.g. Nginx with <code>autoindex on</code>).
+Packages can then be installed for instance in a new virtual env:</p>
+
+<pre><code>&gt; virtualenv2 oe-env
+&gt; oe-env/bin/pip install openerp-sale \
+    --no-index \
+    --find-links http://localhost/tarballs
+</code></pre>
+
+<p>Package dependencies are extracted from the <code>__openerp__.py</code> descriptor files
+and listed in the generated <code>setup.py</code> files. This means that install, say,
+<code>openerp-sale</code> will install all its dependencies, including <code>openerp-core</code> (the
+package for the server/framework).</p>
+
 <h2>Install</h2>
 
 <p>The development version can be installed by cloning the Git repository and using cabal:</p>
@@ -73,10 +94,15 @@ the directory (assumed to be a <code>.bzr</code> repository) is clean.</p>
 
 <p>to generate a nice tarball inside the newly created <code>dist</code> directory.</p>
 
-<h2>Limitations</h2>
+<h2>Limitations / TODO</h2>
 
 <ul>
 <li>Assume the directories where <code>openerpdist</code> is run are <code>bzr</code> repositories.</li>
+<li>Does not generate a README file from the <code>__openerp__.py</code> descriptor.</li>
+<li>The version used for each package is hard-coded to 7.0.1.</li>
+<li>The listed dependencies for <code>openerp-core</code> is not correct (too many things,
+required by some addons) while the ones for the addons don't list the
+non-openerp dependencies.</li>
 </ul>
       </section>
       <footer>
