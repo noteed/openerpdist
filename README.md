@@ -49,7 +49,7 @@ when run inside a serve source tree, will replace the existing `setup.py` and
 generate a `setup.py` file. Note that it will first check with `bzr diff` if
 the directory (assumed to be a `.bzr` repository) is clean.
 
-Once done, you can simple execute
+Once done, you can simply execute
 
     > python2 setup.py sdist
 
@@ -64,7 +64,7 @@ to generate a nice tarball inside the newly created `dist` directory.
 - Assume the directories where `openerpdist` is run are `bzr` repositories.
 - Does not generate a README file from the `__openerp__.py` descriptor.
 - The version used for each package is hard-coded to 7.0.1.
-- The listed dependencies for `openerp-core` is not correct (too many things,
+- The listed dependencies for `openerp-core` are not correct (too many things,
   required by some addons) while the ones for the addons don't list the
   non-openerp dependencies.
 
