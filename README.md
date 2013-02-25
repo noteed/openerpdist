@@ -24,7 +24,7 @@ Packages can then be installed for instance in a new virtual env:
         --find-links http://localhost/tarballs
 
 Package dependencies are extracted from the `__openerp__.py` descriptor files
-and listed in the generated `setup.py` files. This means that install, say,
+and listed in the generated `setup.py` files. This means that installing, say,
 `openerp-sale` will install all its dependencies, including `openerp-core` (the
 package for the server/framework).
 
