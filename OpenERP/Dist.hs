@@ -44,8 +44,8 @@ patch dataDir = do
     else do
       -- Assume openerp-core.
       -- Replace some files with ours.
-      copyFile (dataDir </> "openerpcore" </> "setup.py") "setup.py"
-      copyFile (dataDir </> "openerpcore" </> "MANIFEST.in") "MANIFEST.in"
+      copyFile (dataDir </> "assets" </> "setup.py") "setup.py"
+      copyFile (dataDir </> "assets" </> "MANIFEST.in") "MANIFEST.in"
 
 sdist :: IO ()
 sdist = do

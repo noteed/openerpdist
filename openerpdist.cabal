@@ -13,7 +13,7 @@ maintainer:          thu@hypered.be
 homepage:            http://noteed.com/openerpdist
 bug-reports:         https://github.com/noteed/openerpdist/issues
 build-type:          Simple
-data-files:          openerpcore/MANIFEST.in openerpcore/setup.py
+data-files:          assets/MANIFEST.in assets/setup.py
 
 source-repository head
   type: git
