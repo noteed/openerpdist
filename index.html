@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>openerpdist by noteed</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>openerpdist</h1>
+        <p>Build the OpenERP framework and addons as nice tarballs</p>
+
+        <p class="view"><a href="https://github.com/noteed/openerpdist">View the Project on GitHub <small>noteed/openerpdist</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/noteed/openerpdist/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/noteed/openerpdist/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/noteed/openerpdist">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>openerpdist - Packaging and distributing OpenERP</h1>
+
+<p><code>openerpdist</code> builds the OpenERP framework and addons as nice tarballs, ready
+to be uploaded to pypi with minimal changes from upstream sources.</p>
+
+<p>This project is unsupported by OpenERP s.a.</p>
+
+<p>Please note that even if <code>openerpdist</code> itself uses a 3-clause BSD license, the
+resulting packages remain under the AGPL license.</p>
+
+<h2>Install</h2>
+
+<p>The development version can be installed by cloning the Git repository and using cabal:</p>
+
+<pre><code>&gt; git clone git://github.com/noteed/openerpdist.git
+&gt; cd openerpdist &amp;&amp; cabal install
+</code></pre>
+
+<h2>Usage</h2>
+
+<p><code>openerpdist</code> is simple to use, either withing the server source directory, or
+within a specific addons.</p>
+
+<p>The command</p>
+
+<pre><code>&gt; openerpdist patch
+</code></pre>
+
+<p>when run inside a serve source tree, will replace the existing <code>setup.py</code> and
+<code>MANIFEST.in</code> files, and when run inside a specific addons directory, will
+generate a <code>setup.py</code> file. Note that it will first check with <code>bzr diff</code> if
+the directory (assumed to be a <code>.bzr</code> repository) is clean.</p>
+
+<p>Once done, you can simple execute</p>
+
+<pre><code>&gt; python2 setup.py sdist
+</code></pre>
+
+<p>or alternatively</p>
+
+<pre><code>&gt; openerpdist sdist
+</code></pre>
+
+<p>to generate a nice tarball inside the newly created <code>dist</code> directory.</p>
+
+<h2>Limitations</h2>
+
+<ul>
+<li>Assume the directories where <code>openerpdist</code> is run are <code>bzr</code> repositories.</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/noteed">noteed</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-7990941-10");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
