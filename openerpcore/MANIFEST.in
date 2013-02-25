@@ -1,0 +1,6 @@
+graft doc
+prune doc/_build
+include README
+include LICENSE
+include MANIFEST.in
+global-exclude *pyc *~    # Exclude possible garbage from previous graft.
