@@ -37,27 +37,23 @@ The development version can be installed by cloning the Git repository and using
 
 ## Usage
 
-`openerpdist` is simple to use, either withing the server source directory, or
-within a specific addons.
+`openerpdist` is simple to use, either within the server source directory, or
+within a specific addons, or from a directory containing multiple addons.
 
 The command
 
     > openerpdist patch
 
 when run inside a serve source tree, will replace the existing `setup.py` and
-`MANIFEST.in` files, and when run inside a specific addons directory, will
-generate a `setup.py` file. Note that it will first check with `bzr diff` if
-the directory (assumed to be a `.bzr` repository) is clean.
+`MANIFEST.in` files; for addons it will generate a `setup.py` file. Note that
+it will first check with `bzr diff` if the directory (assumed to be a `.bzr`
+repository) is clean.
 
 Once done, you can simply execute
 
-    > python2 setup.py sdist
-
-or alternatively
-
     > openerpdist sdist
 
-to generate a nice tarball inside the newly created `dist` directory.
+to generate some nice tarballs inside the newly created `dist` directories.
 
 ## Limitations / TODO
 

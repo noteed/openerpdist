@@ -28,7 +28,7 @@ generateSetup modulePath = do
         , ".js" -- some are referenced in the __openerp__.py file, some aren't.
         ]
         modulePath
-      writeFile "setup.py" $ pythonSetup $
+      writeFile (modulePath </> "setup.py") $ pythonSetup $
         descriptorToSetup moduleName subs dataFiles $
         foldl mappend emptyDescriptor $ map entryToDescriptor d
     Right _ -> do

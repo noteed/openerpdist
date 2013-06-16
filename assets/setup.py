@@ -34,7 +34,7 @@ setuptools.setup(
       'Topic :: Software Development :: Libraries :: Application Frameworks',
     ],
     license          = 'AGPL-3',
-    scripts          = ['oe'], # TODO Package separately.
+    scripts          = ['openerp-server'], # TODO Package separately oe.
     packages         = setuptools.find_packages(),
     package_data     = {
         # csv, xml, js, css, po, pot, sql, sxw, xsl, rng
@@ -81,6 +81,7 @@ setuptools.setup(
         'psycopg2',
         'pychart', # not on pypi, use: pip install http://download.gna.org/pychart/PyChart-1.39.tar.gz
         'pydot',
+        'pyparsing < 2', # pyparsing >= 2 is Python 3 only.
         'python-dateutil < 2',
         'python-openid',
         'pytz',

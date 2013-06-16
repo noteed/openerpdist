@@ -3,9 +3,10 @@
 module OpenERP.Dist where
 
 import Control.Exception (bracket)
+import Control.Monad (filterM)
 import System.Directory
   ( canonicalizePath, copyFile, createDirectory, doesFileExist
-  , getCurrentDirectory, setCurrentDirectory
+  , getCurrentDirectory, getDirectoryContents, setCurrentDirectory
   )
 import System.Exit
 import System.FilePath ((</>))
@@ -42,16 +43,49 @@ patch dataDir = do
       cdir <- canonicalizePath dir
       generateSetup cdir
     else do
-      -- Assume openerp-core.
-      -- Replace some files with ours.
-      copyFile (dataDir </> "assets" </> "setup.py") "setup.py"
-      copyFile (dataDir </> "assets" </> "MANIFEST.in") "MANIFEST.in"
+      exist' <- doesFileExist "openerp-server"
+      if exist'
+        then do
+          -- Assume openerp-core.
+          -- Replace some files with ours.
+          copyFile (dataDir </> "assets" </> "setup.py") "setup.py"
+          copyFile (dataDir </> "assets" </> "MANIFEST.in") "MANIFEST.in"
+        else do
+          -- Assume a directory with some addons.
+          dir <- getCurrentDirectory
+          dirs <- findAddons dir
+          cdirs <- mapM canonicalizePath dirs
+          mapM_ generateSetup cdirs
+
+findAddons :: FilePath -> IO [FilePath]
+findAddons dir = do
+  dirs_ <- getDirectoryContents dir
+  let dirs = filter (\d -> d /= "." && d /= "..") dirs_
+  dirs' <- filterM (doesFileExist . (\d -> dir </> d </> "__init__.py")) dirs
+  dirs'' <- filterM (doesFileExist . (\d -> dir </> d </> "__openerp__.py")) dirs'
+  return dirs''
 
 sdist :: IO ()
 sdist = do
   -- TODO Check exit code.
-  _ <- rawSystem "python2" ["setup.py", "sdist"]
-  return ()
+  let call = do _ <- rawSystem "python2" ["setup.py", "sdist"]
+                return ()
+  exist <- doesFileExist "__openerp__.py"
+  if exist
+    then do
+      -- Assume an addons.
+      call
+    else do
+      exist' <- doesFileExist "openerp-server"
+      if exist'
+        then do
+          call
+        else do
+          -- Assume a directory with some addons.
+          dir <- getCurrentDirectory
+          dirs <- findAddons dir
+          cdirs <- mapM canonicalizePath dirs
+          mapM_ (flip withDirectory call) cdirs
 
 checkSdist :: IO ()
 checkSdist = do
