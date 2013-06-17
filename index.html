@@ -28,7 +28,8 @@
         </ul>
       </header>
       <section>
-        <h1>openerpdist - Packaging and distributing OpenERP</h1>
+        <h1>
+<a name="openerpdist---packaging-and-distributing-openerp" class="anchor" href="#openerpdist---packaging-and-distributing-openerp"><span class="octicon octicon-link"></span></a>openerpdist - Packaging and distributing OpenERP</h1>
 
 <p><code>openerpdist</code> builds the OpenERP framework and addons as nice tarballs, ready
 to be uploaded to pypi with minimal changes from upstream sources.</p>
@@ -38,7 +39,8 @@ to be uploaded to pypi with minimal changes from upstream sources.</p>
 <p>Please note that even if <code>openerpdist</code> itself uses a 3-clause BSD license, the
 resulting packages remain under the AGPL license.</p>
 
-<h2>Details</h2>
+<h2>
+<a name="details" class="anchor" href="#details"><span class="octicon octicon-link"></span></a>Details</h2>
 
 <p><code>openerpdist</code> builds packages ready to be consumed by the Python
 infrastructure. In particular, it uses the regular <code>setup.py</code> files (using
@@ -59,18 +61,20 @@ and listed in the generated <code>setup.py</code> files. This means that install
 <code>openerp-sale</code> will install all its dependencies, including <code>openerp-core</code> (the
 package for the server/framework).</p>
 
-<h2>Install</h2>
+<h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
 
-<p>The development version can be installed by cloning the Git repository and using cabal:</p>
+<p>The development version can be installed by cloning the Git repository and using Cabal:</p>
 
 <pre><code>&gt; git clone git://github.com/noteed/openerpdist.git
 &gt; cd openerpdist &amp;&amp; cabal install
 </code></pre>
 
-<h2>Usage</h2>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p><code>openerpdist</code> is simple to use, either withing the server source directory, or
-within a specific addons.</p>
+<p><code>openerpdist</code> is simple to use, either within the server source directory, or
+within a specific addons, or from a directory containing multiple addons.</p>
 
 <p>The command</p>
 
@@ -78,23 +82,19 @@ within a specific addons.</p>
 </code></pre>
 
 <p>when run inside a serve source tree, will replace the existing <code>setup.py</code> and
-<code>MANIFEST.in</code> files, and when run inside a specific addons directory, will
-generate a <code>setup.py</code> file. Note that it will first check with <code>bzr diff</code> if
-the directory (assumed to be a <code>.bzr</code> repository) is clean.</p>
+<code>MANIFEST.in</code> files; for addons it will generate a <code>setup.py</code> file. Note that
+it will first check with <code>bzr diff</code> if the directory (assumed to be a <code>.bzr</code>
+repository) is clean.</p>
 
 <p>Once done, you can simply execute</p>
-
-<pre><code>&gt; python2 setup.py sdist
-</code></pre>
-
-<p>or alternatively</p>
 
 <pre><code>&gt; openerpdist sdist
 </code></pre>
 
-<p>to generate a nice tarball inside the newly created <code>dist</code> directory.</p>
+<p>to generate some nice tarballs inside the newly created <code>dist</code> directories.</p>
 
-<h2>Limitations / TODO</h2>
+<h2>
+<a name="limitations--todo" class="anchor" href="#limitations--todo"><span class="octicon octicon-link"></span></a>Limitations / TODO</h2>
 
 <ul>
 <li>Assume the directories where <code>openerpdist</code> is run are <code>bzr</code> repositories.</li>
