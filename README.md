@@ -55,6 +55,23 @@ Once done, you can simply execute
 
 to generate some nice tarballs inside the newly created `dist` directories.
 
+## Other dependencies
+
+`openerpdist` lists the correct dependencies in the `setup.py` file. This is
+enough for Python dependencies. But in addition, some of those dependencies,
+and thus indirectly the packaged OpenERP libraries, need libraries and
+programs to be installed with your operating system facilities.
+
+On Ubuntu 12.04 those additional dependencies are:
+
+(The list is incomplete for now.)
+
+- libjpeg-dev
+- zlib1g-dev
+
+libjpeg-dev and zlib1g-dev are for JPEG and ZIP support in Pillow (`openerpdist`
+sets Pillow instead of PIL).
+
 ## Limitations / TODO
 
 - Assume the directories where `openerpdist` is run are `bzr` repositories.

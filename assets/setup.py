@@ -70,30 +70,35 @@ setuptools.setup(
         'babel',
         'coverage', # TODO for oe initialize --coverage, make it optional.
         'docutils',
-        'feedparser',
-        'gdata',
-        'Jinja2',
+        #'feedparser',
+        #'gdata',
+        #'Jinja2',
         'lxml',
         'mako',
-        'mock',
-        'PIL',
+        #'mock',
+        'pillow',
         'psutil',
         'psycopg2',
-        'pychart', # not on pypi, use: pip install http://download.gna.org/pychart/PyChart-1.39.tar.gz
+        # pychart is not on pypi, use:
+        #   > pip install http://download.gna.org/pychart/PyChart-1.39.tar.gz
+        # or the dependency_links above.
+        'pychart',
         'pydot',
-        'pyparsing < 2', # pyparsing >= 2 is Python 3 only.
+        # pyparsing is a pydot dependency but pydot does not require pyparsing
+        # < 2 although pyparsing >= 2 is Python 3 only.
+        'pyparsing < 2',
         'python-dateutil < 2',
-        'python-openid',
+        #'python-openid',
         'pytz',
-        'pywebdav',
+        #'pywebdav',
         'pyyaml',
         'reportlab',
         'simplejson',
         'unittest2',
-        'vatnumber',
-        'vobject',
+        #'vatnumber',
+        #'vobject',
         'werkzeug',
-        'xlwt',
+        #'xlwt',
     ],
     extras_require = {
         'SSL': ['pyopenssl'],
