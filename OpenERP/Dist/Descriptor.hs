@@ -13,8 +13,8 @@ import System.Exit (exitFailure)
 import System.FilePath ((</>), splitDirectories, takeExtension)
 
 -- | Generate a `setup.py` file for a module given its path.
-generateSetup :: String -> IO ()
-generateSetup modulePath = do
+generateSetup :: Maybe String -> String -> IO ()
+generateSetup mversion modulePath = do
   -- TODO check directory exists.
   -- TODO check file exists.
   let filename = modulePath </> "__openerp__.py"
@@ -31,7 +31,7 @@ generateSetup modulePath = do
         ]
         modulePath
       writeFile (modulePath </> "setup.py") $ pythonSetup $
-        descriptorToSetup moduleName subs dataFiles $
+        descriptorToSetup mversion moduleName subs dataFiles $
         foldl mappend emptyDescriptor $ map entryToDescriptor d
     Right _ -> do
       putStrLn "The module must contain a single dictionary."
@@ -270,10 +270,10 @@ openerpaddons name =
   "openerp-" ++ map (\c -> if c == '_' then '-' else c) name
 
 -- | Convert a Descriptor value to a Setup value.
-descriptorToSetup :: String -> [String] -> [String] -> Descriptor -> Setup
-descriptorToSetup name subs dataFiles Descriptor{..} = Setup
+descriptorToSetup :: Maybe String -> String -> [String] -> [String] -> Descriptor -> Setup
+descriptorToSetup mversion name subs dataFiles Descriptor{..} = Setup
   { setupName = name
-  , setupVersion = "7.0.1" -- TODO descriptorVersion
+  , setupVersion = maybe "7.0.1" id mversion
   , setupDescription = descriptorName
   , setupLongDescription = descriptorDescription
   , setupUrl = descriptorWebsite

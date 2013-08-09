@@ -33,15 +33,15 @@ exitIfDiffPresent = do
       putStrLn "Not a working copy or it contains changes, aborting."
       exitFailure
 
-patch :: FilePath -> IO ()
-patch dataDir = do
+patch :: Maybe String -> FilePath -> IO ()
+patch mversion dataDir = do
   exist <- doesFileExist "__openerp__.py"
   if exist
     then do
       -- Assume an addons.
       dir <- getCurrentDirectory
       cdir <- canonicalizePath dir
-      generateSetup cdir
+      generateSetup mversion cdir
     else do
       exist' <- doesFileExist "openerp-server"
       if exist'
@@ -55,7 +55,7 @@ patch dataDir = do
           dir <- getCurrentDirectory
           dirs <- findAddons dir
           cdirs <- mapM canonicalizePath dirs
-          mapM_ generateSetup cdirs
+          mapM_ (generateSetup mversion) cdirs
 
 findAddons :: FilePath -> IO [FilePath]
 findAddons dir = do

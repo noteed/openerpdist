@@ -28,6 +28,8 @@ versionString = "openerpdist " ++ showVersion version
 -- | Data type representing the different command-line subcommands.
 data Cmd =
     Patch
+  { cmdVersion :: Maybe String
+  }
     -- ^ Patch upstream sources
   | Sdist
     -- ^ Call patch and then build a tarball.
@@ -40,7 +42,10 @@ data Cmd =
 -- | Create a 'Patch' command.
 cmdPatch :: Cmd
 cmdPatch = Patch
-    &= help "Patch upstream sources."
+  { cmdVersion = def
+    &= args
+    &= typ "VERSION"
+  } &= help "Patch upstream sources, VERSION should look like a.b.c."
     &= explicit
     &= name "patch"
 
@@ -70,7 +75,7 @@ runCmd :: Cmd -> IO ()
 runCmd Patch{..} = do
   dataDir <- getDataDir
   exitIfDiffPresent
-  patch dataDir
+  patch cmdVersion dataDir
 
 runCmd Sdist{..} = sdist
 
