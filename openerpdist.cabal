@@ -33,7 +33,7 @@ executable openerpdist
   hs-source-dirs:      bin
   main-is:             openerpdist.hs
   build-depends:       base == 4.*,
-                       cmdargs == 0.9.*,
+                       cmdargs >= 0.9 && < 0.11,
                        openerpdist
   ghc-options:         -Wall
 
