@@ -3,4 +3,6 @@ prune doc/_build
 include README
 include LICENSE
 include MANIFEST.in
+recursive-include openerp *.csv *.xml *.yml *.ico *.gif *.jpg *.jpeg *.png
+recursive-include openerp *.eot *.svg *.ttf *.woff *.js *.rng *.sql
 global-exclude *pyc *~    # Exclude possible garbage from previous graft.
