@@ -28,11 +28,31 @@ generateSetup mversion modulePath = do
         [ ".ico", ".gif", ".jpg", ".jpeg", ".png"
         , ".eot", ".svg", ".ttf", ".woff" -- webfonts, not sure if they are all needed.
         , ".js" -- some are referenced in the __openerp__.py file, some aren't.
+        , ".csv", ".xml", ".yml"
+        , ".rml"
         ]
         modulePath
       writeFile (modulePath </> "setup.py") $ pythonSetup $
         descriptorToSetup mversion moduleName subs dataFiles $
         foldl mappend emptyDescriptor $ map entryToDescriptor d
+      let f [_] = ""
+          f (x:xs) = x
+          f [] = ""
+          dirs = nub $ map (f . splitDirectories) dataFiles
+      writeFile (modulePath </> "MANIFEST.in") $ unlines $
+        [ "graft doc"
+        , "prune doc/_build"
+        , "include README"
+        , "include LICENSE"
+        , "include MANIFEST.in"
+        ] ++ concatMap (\d ->
+          -- TODO we should write only the patterns that make sense for this
+          -- particular addons
+          [ (if d == "" then "include" else "recursive-include " ++ d) ++ " *.csv *.xml *.yml *.ico *.gif *.jpg *.jpeg *.png"
+          , (if d == "" then "include" else "recursive-include " ++ d) ++ " *.eot *.svg *.ttf *.woff *.js *.rng *.sql *.rml"
+          ]) dirs ++
+        [ "global-exclude *pyc *~"
+        ]
     Right _ -> do
       putStrLn "The module must contain a single dictionary."
       exitFailure
@@ -56,7 +76,7 @@ findData name exts modulePath = do
   files <- filterM (doesFileExist . (modulePath </>)) content
   subfiles <- mapM (\d -> findData d exts (modulePath </> d)) dirs
   let files' = filter (matchExtensions exts) files
-  return $ map (\d -> name ++ "/" ++ d) $ files' ++ concat subfiles
+  return $ map (\d -> if name == "." then d else name ++ "/" ++ d) $ files' ++ concat subfiles
 
 matchExtensions :: [String] -> FilePath -> Bool
 matchExtensions exts filename = takeExtension filename `elem` exts
