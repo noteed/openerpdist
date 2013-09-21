@@ -50,6 +50,18 @@ patch mversion dataDir = do
           -- Replace some files with ours.
           copyFile (dataDir </> "assets" </> "setup.py") "setup.py"
           copyFile (dataDir </> "assets" </> "MANIFEST.in") "MANIFEST.in"
+          -- Quick and dirtry way to set the version inside the setup.py.
+          -- Normally, we should use the OpenERP.Dist.Descriptor representation
+          -- TODO that.
+          case mversion of
+            Just version -> do
+              _ <- rawSystem "sed"
+                [ "-i"
+                , "-e", "s/version          = '7.0.1',/version          = '" ++ version ++ "',/"
+                , "setup.py"
+                ]
+              return ()
+            Nothing -> return ()
         else do
           -- Assume a directory with some addons.
           dir <- getCurrentDirectory
