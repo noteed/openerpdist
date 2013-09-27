@@ -333,6 +333,7 @@ convertDependency name = openerpaddons name
 -- addons (but that are likely listed in the server's __openerp__.py).
 hardcodedRequires :: String -> [String]
 hardcodedRequires "web" = ["mock"]
+hardcodedRequires "email_template" = ["Jinja2"]
 hardcodedRequires _ = []
 
 packageData dat demo qweb css js = concat [dat, demo, qweb, css, js]
