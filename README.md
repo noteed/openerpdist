@@ -22,6 +22,17 @@ Packages can then be installed for instance in a new virtual env:
     > oe-env/bin/pip install openerp-sale \
         --no-index \
         --find-links http://localhost/tarballs
+        
+or alternatively you can edit [`$HOME/.pip/pip.conf`](http://www.pip-installer.org/en/latest/configuration.html#configuration) file and append:
+
+    [global]
+    find-links =
+        http://localhost/tarballs
+
+and then just use:
+
+    > virtualenv2 oe-env
+    > oe-env/bin/pip install openerp-sale
 
 Package dependencies are extracted from the `__openerp__.py` descriptor files
 and listed in the generated `setup.py` files. This means that installing, say,
