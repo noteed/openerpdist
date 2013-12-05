@@ -58,7 +58,7 @@ setuptools.setup(
         'openerp.addons.base.module' : ['*.xml', 'report/*.sxw'],
         'openerp.addons.base.module.wizard' : ['*.xml'],
         'openerp.addons.base.res' : [
-            '*.png', '*.xml', '*.yml',
+            '*.png', '*.csv', '*.xml', '*.yml',
             'config_pixmaps/*.png',
             'report/*.xml', 'report/*.xsl'
         ],
