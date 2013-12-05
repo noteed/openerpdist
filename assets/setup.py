@@ -52,7 +52,6 @@ setuptools.setup(
         'openerp.addons.base.ir' : [
             '*.xml',
             'report/*.sxw', 'report/*.xml',
-            'workflow/*.xml'
         ],
         'openerp.addons.base.ir.wizard' : ['*.xml'],
         'openerp.addons.base.module' : ['*.xml', 'report/*.sxw'],
@@ -62,7 +61,7 @@ setuptools.setup(
             'config_pixmaps/*.png',
             'report/*.xml', 'report/*.xsl'
         ],
-        'openerp.addons.base.res.wizard' : ['*.xml'],
+        'openerp.addons.base.workflow' : ['*.xml'],
     },
     dependency_links = ['http://download.gna.org/pychart/'],
     # TODO Keep only the openerp-core dependencies here.
