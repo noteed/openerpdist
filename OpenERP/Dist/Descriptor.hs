@@ -336,6 +336,10 @@ hardcodedRequires :: String -> [String]
 hardcodedRequires "email_template" = ["Jinja2"]
 hardcodedRequires "auth_openid" = ["python-openid"]
 hardcodedRequires "web" = ["mock"]
+-- delivery depends on sale and stock but not explicitely on sale_stock.
+-- This might qualify as a bug in delivery's __openerp__.py ?
+-- Bug filled: https://bugs.launchpad.net/openobject-addons/+bug/1258973.
+hardcodedRequires "delivery" = ["openerp-sale-stock"]
 hardcodedRequires _ = []
 
 packageData dat demo qweb css js = concat [dat, demo, qweb, css, js]
