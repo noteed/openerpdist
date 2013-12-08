@@ -341,6 +341,7 @@ hardcodedRequires "web" = ["mock"]
 -- This might qualify as a bug in delivery's __openerp__.py ?
 -- Bug filled: https://bugs.launchpad.net/openobject-addons/+bug/1258973.
 hardcodedRequires "delivery" = ["openerp-sale-stock"]
+hardcodedRequires "project_mrp" = ["openerp-sale-stock"]
 hardcodedRequires _ = []
 
 packageData dat demo qweb css js = concat [dat, demo, qweb, css, js]
