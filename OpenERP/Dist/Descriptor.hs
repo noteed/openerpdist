@@ -334,6 +334,7 @@ convertDependency name = openerpaddons name
 -- addons (but that are likely listed in the server's __openerp__.py).
 hardcodedRequires :: String -> [String]
 hardcodedRequires "email_template" = ["Jinja2"]
+hardcodedRequires "auth_ldap" = ["python-ldap"]
 hardcodedRequires "auth_openid" = ["python-openid"]
 hardcodedRequires "web" = ["mock"]
 -- delivery depends on sale and stock but not explicitely on sale_stock.
