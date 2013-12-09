@@ -28,7 +28,7 @@ generateSetup mversion modulePath = do
         [ ".ico", ".gif", ".jpg", ".jpeg", ".png"
         , ".eot", ".svg", ".ttf", ".woff" -- webfonts, not sure if they are all needed.
         , ".js" -- some are referenced in the __openerp__.py file, some aren't.
-        , ".csv", ".xml", ".yml", ".eml"
+        , ".csv", ".xml", ".yml", ".eml", ".html", ".mako" -- html for report_webkit
         , ".rml", ".sxw", ".xsl"
         , ".po", "*.pot"
         ]
@@ -49,7 +49,7 @@ generateSetup mversion modulePath = do
         ] ++ concatMap (\d ->
           -- TODO we should write only the patterns that make sense for this
           -- particular addons
-          [ (if d == "" then "include" else "recursive-include " ++ d) ++ " *.csv *.xml *.yml *.eml *.ico *.gif *.jpg *.jpeg *.png *sxw *.xsl"
+          [ (if d == "" then "include" else "recursive-include " ++ d) ++ " *.csv *.xml *.yml *.eml *.html *.mako *.ico *.gif *.jpg *.jpeg *.png *sxw *.xsl"
           , (if d == "" then "include" else "recursive-include " ++ d) ++ " *.eot *.svg *.ttf *.woff *.js *.rng *.sql *.rml *.po *.pot"
           ]) dirs ++
         [ "global-exclude *pyc *~"
