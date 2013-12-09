@@ -336,6 +336,7 @@ hardcodedRequires :: String -> [String]
 hardcodedRequires "email_template" = ["Jinja2"]
 hardcodedRequires "auth_ldap" = ["python-ldap"]
 hardcodedRequires "auth_openid" = ["python-openid"]
+hardcodedRequires "report_webkit" = ["Jinja2"]
 hardcodedRequires "web" = ["mock"]
 -- delivery depends on sale and stock but not explicitely on sale_stock.
 -- This might qualify as a bug in delivery's __openerp__.py ?
