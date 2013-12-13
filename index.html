@@ -56,6 +56,19 @@ Packages can then be installed for instance in a new virtual env:</p>
     --find-links http://localhost/tarballs
 </code></pre>
 
+<p>or alternatively you can edit <a href="http://www.pip-installer.org/en/latest/configuration.html#configuration"><code>$HOME/.pip/pip.conf</code></a> file and append:</p>
+
+<pre><code>[global]
+find-links =
+    http://localhost/tarballs
+</code></pre>
+
+<p>and then just use:</p>
+
+<pre><code>&gt; virtualenv2 oe-env
+&gt; oe-env/bin/pip install openerp-sale
+</code></pre>
+
 <p>Package dependencies are extracted from the <code>__openerp__.py</code> descriptor files
 and listed in the generated <code>setup.py</code> files. This means that installing, say,
 <code>openerp-sale</code> will install all its dependencies, including <code>openerp-core</code> (the
@@ -64,7 +77,7 @@ package for the server/framework).</p>
 <h2>
 <a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
 
-<p>The development version can be installed by cloning the Git repository and using Cabal:</p>
+<p>The development version can be installed by cloning the Git repository and using cabal:</p>
 
 <pre><code>&gt; git clone git://github.com/noteed/openerpdist.git
 &gt; cd openerpdist &amp;&amp; cabal install
@@ -94,6 +107,24 @@ repository) is clean.</p>
 <p>to generate some nice tarballs inside the newly created <code>dist</code> directories.</p>
 
 <h2>
+<a name="other-dependencies" class="anchor" href="#other-dependencies"><span class="octicon octicon-link"></span></a>Other dependencies</h2>
+
+<p><code>openerpdist</code> lists the correct dependencies in the <code>setup.py</code> file. This is
+enough for Python dependencies. But in addition, some of those dependencies,
+and thus indirectly the packaged OpenERP libraries, need libraries and
+programs to be installed with your operating system facilities.</p>
+
+<p>On Ubuntu 12.04 those additional dependencies are:</p>
+
+<p>(The list is incomplete for now.)</p>
+
+<ul>
+<li>libjpeg-dev</li>
+<li>zlib1g-dev</li>
+</ul><p>libjpeg-dev and zlib1g-dev are for JPEG and ZIP support in Pillow (<code>openerpdist</code>
+sets Pillow instead of PIL).</p>
+
+<h2>
 <a name="limitations--todo" class="anchor" href="#limitations--todo"><span class="octicon octicon-link"></span></a>Limitations / TODO</h2>
 
 <ul>
@@ -111,16 +142,6 @@ non-openerp dependencies.</li>
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-7990941-10");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
+    
   </body>
 </html>
