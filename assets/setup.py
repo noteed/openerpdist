@@ -12,6 +12,7 @@ import setuptools
 setuptools.setup(
     name             = 'openerp-core',
     # Keep the official version.
+    # TODO This is wrong for trunk.
     version          = '7.0.1',
     description      = 'Core OpenERP package',
     # TODO
@@ -61,7 +62,8 @@ setuptools.setup(
             'config_pixmaps/*.png',
             'report/*.xml', 'report/*.xsl'
         ],
-        'openerp.addons.base.workflow' : ['*.xml'],
+        'openerp.addons.base.workflow' : ['*.xml'], # For trunk.
+        'openerp.addons.base.ir.workflow' : ['*.xml'], # For 7.0.
     },
     dependency_links = ['http://download.gna.org/pychart/'],
     # TODO Keep only the openerp-core dependencies here.
