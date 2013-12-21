@@ -337,6 +337,8 @@ hardcodedRequires "email_template" = ["Jinja2"]
 hardcodedRequires "auth_ldap" = ["python-ldap"]
 hardcodedRequires "auth_openid" = ["python-openid"]
 hardcodedRequires "document_webdav" = ["PyWebDAV"]
+hardcodedRequires "google_base_account" = ["gdata"] -- For 7.0.
+hardcodedRequires "google_docs" = ["gdata"] -- For 7.0.
 hardcodedRequires "report_webkit" = ["Jinja2"]
 hardcodedRequires "web" = ["mock"]
 -- delivery depends on sale and stock but not explicitely on sale_stock.
