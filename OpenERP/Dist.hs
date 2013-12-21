@@ -82,6 +82,8 @@ sdist = do
   -- TODO Check exit code.
   let call = do _ <- rawSystem "python2" ["setup.py", "sdist"]
                 return ()
+  let call' = do _ <- rawSystem "python2" ["setup.py", "sdist", "upload"]
+                 return ()
   exist <- doesFileExist "__openerp__.py"
   if exist
     then do
@@ -91,7 +93,7 @@ sdist = do
       exist' <- doesFileExist "openerp-server"
       if exist'
         then do
-          call
+          call'
         else do
           -- Assume a directory with some addons.
           dir <- getCurrentDirectory
