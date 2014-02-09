@@ -14,6 +14,7 @@ main = (runCmd =<<) . cmdArgs $
   modes
     [ cmdPatch
     , cmdSdist
+    , cmdUpload
     , cmdCheckSdist
     , cmdTestSdist
     ]
@@ -33,6 +34,8 @@ data Cmd =
     -- ^ Patch upstream sources
   | Sdist
     -- ^ Call patch and then build a tarball.
+  | Upload
+    -- ^ Same as Sdist but also upload to PyPI.
   | CheckSdist
     -- ^ Check the previously built tarball can regenerate itself.
   | TestSdist
@@ -56,6 +59,13 @@ cmdSdist = Sdist
     &= explicit
     &= name "sdist"
 
+-- | Create an 'Upload' command.
+cmdUpload :: Cmd
+cmdUpload = Upload
+    &= help "Build a tarball and upload it to PyPI."
+    &= explicit
+    &= name "upload"
+
 -- | Create a 'CheckSdist' command.
 cmdCheckSdist :: Cmd
 cmdCheckSdist = CheckSdist
@@ -77,7 +87,9 @@ runCmd Patch{..} = do
   exitIfDiffPresent
   patch cmdVersion dataDir
 
-runCmd Sdist{..} = sdist
+runCmd Sdist{..} = sdist False
+
+runCmd Upload{..} = sdist True
 
 runCmd CheckSdist{..} = checkSdist
 

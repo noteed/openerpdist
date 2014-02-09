@@ -77,19 +77,20 @@ findAddons dir = do
   dirs'' <- filterM (doesFileExist . (\d -> dir </> d </> "__openerp__.py")) dirs'
   return dirs''
 
-sdist :: IO ()
-sdist = do
+sdist :: Bool -> IO ()
+sdist upload = do
   -- TODO Check exit code.
-  let call = do _ <- rawSystem "python2" ["setup.py", "sdist"]
-                return ()
-  let call' = do _ <- rawSystem "python2" ["setup.py", "register"]
+  let call1 = do _ <- rawSystem "python2" ["setup.py", "sdist"]
+                 return ()
+      call2 = do _ <- rawSystem "python2" ["setup.py", "register"]
                  _ <- rawSystem "python2" ["setup.py", "sdist", "upload"]
                  return ()
+      call = if upload then call2 else call1
   exist <- doesFileExist "__openerp__.py"
   if exist
     then do
       -- Assume an addons.
-      call'
+      call
     else do
       exist' <- doesFileExist "openerp-server"
       if exist'
@@ -100,7 +101,7 @@ sdist = do
           dir <- getCurrentDirectory
           dirs <- findAddons dir
           cdirs <- mapM canonicalizePath dirs
-          mapM_ (flip withDirectory call') cdirs
+          mapM_ (flip withDirectory call) cdirs
 
 checkSdist :: IO ()
 checkSdist = do
